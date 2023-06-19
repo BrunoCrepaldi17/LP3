@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Trab2_LP3;
 
 import javax.swing.*;
@@ -18,6 +13,9 @@ public class JogoDaMemoria extends JFrame {
     private JButton[] botoes;
     private int primeiraEscolha = -1;
     private int segundaEscolha = -1;
+    private int paresJogador1 = 0;
+    private int paresJogador2 = 0;
+    private boolean vezJogador1 = true;
 
     public JogoDaMemoria() {
         setTitle("Jogo da Memória");
@@ -47,7 +45,7 @@ public class JogoDaMemoria extends JFrame {
                             break;
                         }
                     }
-                    if (indice != -1) {
+                    if (indice != -1 && source.isEnabled()) {
                         if (primeiraEscolha == -1) {
                             primeiraEscolha = indice;
                             source.setText(Integer.toString(numeros.get(indice)));
@@ -71,19 +69,29 @@ public class JogoDaMemoria extends JFrame {
     private void verificarJogada() {
         if (numeros.get(primeiraEscolha).equals(numeros.get(segundaEscolha))) {
             JOptionPane.showMessageDialog(null, "Acertou!");
+            if (vezJogador1) {
+                paresJogador1++;
+            } else {
+                paresJogador2++;
+            }
             primeiraEscolha = -1;
             segundaEscolha = -1;
             verificarFimJogo();
         } else {
-            JOptionPane.showMessageDialog(null, "Errou!");
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
+                    try {
+                        Thread.sleep(1000); // Espera 1 segundo antes de virar as cartas
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     botoes[primeiraEscolha].setText("");
                     botoes[primeiraEscolha].setEnabled(true);
                     botoes[segundaEscolha].setText("");
                     botoes[segundaEscolha].setEnabled(true);
                     primeiraEscolha = -1;
                     segundaEscolha = -1;
+                    vezJogador1 = !vezJogador1;
                 }
             });
         }
@@ -98,7 +106,20 @@ public class JogoDaMemoria extends JFrame {
             }
         }
         if (fimJogo) {
-            JOptionPane.showMessageDialog(null, "Parabéns, você venceu!");
+            String mensagem = "Jogo finalizado!\n";
+            mensagem += "Pares encontrados pelo Jogador 1: " + paresJogador1 + "\n";
+            mensagem += "Pares encontrados pelo Jogador 2: " + paresJogador2 + "\n";
+
+            if (paresJogador1 > paresJogador2) {
+                mensagem += "Jogador 1 venceu!";
+            } else if (paresJogador1 < paresJogador2) {
+                mensagem += "Jogador 2 venceu!";
+            } else {
+                mensagem += "Empate!";
+            }
+
+            JOptionPane.showMessageDialog(null, mensagem);
+            System.exit(0);
         }
     }
 
