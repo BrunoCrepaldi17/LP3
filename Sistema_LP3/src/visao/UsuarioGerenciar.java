@@ -196,43 +196,94 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-        
+
         new UsuarioCadastrar().setVisible(true);
-        
+
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jTextFieldPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarKeyReleased
-    
-        String campoPesquisa =jTextFieldPesquisar.getText();
-        
+
+        String campoPesquisa = jTextFieldPesquisar.getText();
+
         if (!campoPesquisa.equals("")) {
             this.preencherTabela(campoPesquisa);
         }
     }//GEN-LAST:event_jTextFieldPesquisarKeyReleased
 
     private void preencherTabela(String campoPesquisa) {
-        
-        System.out.println("Pesquisando por: " + campoPesquisa);
+
+        DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
+        modelo.setNumRows(0);
+
+        try {
+            UsuarioDao dao = new UsuarioDao();
+            List<Usuario> lista = dao.buscar(campoPesquisa);
+
+            for (Usuario obj : lista) {
+                String[] linha = {
+                    obj.getId().toString(),
+                    obj.getNome(),
+                    obj.getEmail(),
+                    ""
+                };
+                modelo.addRow(linha);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao pesquisar. " + ex.getMessage());
+        }
+
     }
 
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        JOptionPane.showConfirmDialog(this, "Confirma a exclusão?");
 
-        
+        int linhaSelecionada = jTableDados.getSelectedRow();
+
+        if (linhaSelecionada != -1) {
+            Integer id = Integer.parseInt(
+                    jTableDados.getModel().getValueAt(linhaSelecionada, 0).toString());
+
+            try {
+                UsuarioDao dao = new UsuarioDao();
+                dao.excuir(id);
+
+                DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
+                modelo.removeRow(linhaSelecionada);
+
+                JOptionPane.showMessageDialog(this, "Registro excluido com sucesso!!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Erro ao excluir o registro" + e.getMessage());
+            }
+            
+        }else {
+           JOptionPane.showConfirmDialog(this, "Selecione um registro");
+        }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void alterar() {
-        
+        int linhaSelecionada = jTableDados.getSelectedRow();
+
+        if (linhaSelecionada != -1) {
+            Integer id = Integer.parseInt(
+                    jTableDados.getModel().getValueAt(linhaSelecionada, 0).toString());
+
+            UsuarioAlterar form = new UsuarioAlterar();
+            form.setVisible(true);
+            form.mostrarUsuario(id.toString());
+        } else {
+            JOptionPane.showConfirmDialog(this, "Selecione um registro");
+        }
     }
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-
-        
-
+        this.alterar();
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTableDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDadosMouseClicked

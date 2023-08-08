@@ -4,12 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema_LP3/src/controlador/UsuarioDao.java</file>
-            <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema_LP3/src/visao/UsuarioCadastrar.java</file>
-            <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema_LP3/src/testes/UsuarioBuscar.java</file>
-            <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema_LP3/src/testes/UsuarioInserir.java</file>
+            <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema_LP3/src/visao/UsuarioGerenciar.java</file>
             <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema_LP3/src/visao/UsuarioAlterar.java</file>
-            <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema_LP3/src/controlador/Conexao.java</file>
-            <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema_LP3/src/modelo/Usuario.java</file>
         </group>
     </open-files>
 </project-private>
