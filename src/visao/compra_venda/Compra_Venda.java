@@ -46,7 +46,7 @@ public class Compra_Venda extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextFieldIdProduto = new javax.swing.JTextField();
         jTextFieldNomeProduto = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jButtonSelecionarProdutos = new javax.swing.JButton();
         jTextFieldQuantidade = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldValorUnitario = new javax.swing.JTextField();
@@ -98,7 +98,18 @@ public class Compra_Venda extends javax.swing.JFrame {
 
         jLabel5.setText("Qtd.");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
+        jTextFieldIdProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIdProdutoActionPerformed(evt);
+            }
+        });
+
+        jButtonSelecionarProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
+        jButtonSelecionarProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarProdutosActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Valor Unit.");
 
@@ -187,7 +198,7 @@ public class Compra_Venda extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButtonSelecionarClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jButtonSelecionarProdutos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addComponent(jLabel8)
@@ -230,7 +241,7 @@ public class Compra_Venda extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jTextFieldIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonSelecionarProdutos))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -292,6 +303,19 @@ public class Compra_Venda extends javax.swing.JFrame {
         ).setVisible(true);
     }//GEN-LAST:event_jButtonSelecionarClientesActionPerformed
 
+    private void jTextFieldIdProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIdProdutoActionPerformed
+
+    private void jButtonSelecionarProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarProdutosActionPerformed
+        new Selecionar(
+                jTextFieldIdProduto,
+                jTextFieldNomeProduto,
+                "Produto",
+                "nome"
+        ).setVisible(true);
+    }//GEN-LAST:event_jButtonSelecionarProdutosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -328,12 +352,12 @@ public class Compra_Venda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButtonSelecionarClientes;
+    private javax.swing.JButton jButtonSelecionarProdutos;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

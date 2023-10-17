@@ -29,13 +29,18 @@ public class Selecionar extends javax.swing.JFrame {
     
     public Selecionar (JTextField campoId, JTextField campoDescricao,
             String tabela, String descricao){
+        
+        initComponents();
+        
         this.campoId = campoId;
         this.campoDescricao = campoDescricao;
         this.tabela = tabela;
         this.descricao = descricao;
+        
+        jLabelSelecao.setText(jLabelSelecao.getText()+" "+ tabela);
     }
     public Selecionar() {
-        initComponents();
+        
     }
 
     /**
@@ -52,8 +57,8 @@ public class Selecionar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextFieldPesquisar = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jLabelSelecao = new javax.swing.JLabel();
+        jButtonRetornar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,12 +87,17 @@ public class Selecionar extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Seleção de");
+        jLabelSelecao.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelSelecao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelSelecao.setText("Seleção de");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
-        jButton2.setText("Retomar Selecionado");
+        jButtonRetornar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
+        jButtonRetornar.setText("Retomar Selecionado");
+        jButtonRetornar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRetornarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,17 +116,17 @@ public class Selecionar extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelSelecao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(jButtonRetornar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(jLabelSelecao)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -125,7 +135,7 @@ public class Selecionar extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(jButtonRetornar)
                 .addContainerGap())
         );
 
@@ -180,6 +190,22 @@ public class Selecionar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTextFieldPesquisarKeyReleased
 
+    private void jButtonRetornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetornarActionPerformed
+        int linhaSelecionada = jTableDados.getSelectedRow();
+        
+        String id = "", descricao = "";
+        
+        if (linhaSelecionada != -1) {
+            id = jTableDados.getModel().getValueAt(linhaSelecionada, 0).toString();
+            descricao = jTableDados.getModel().getValueAt(linhaSelecionada, 1).toString();
+        }
+        
+        campoId.setText(id);
+        campoDescricao.setText(descricao);
+        
+        this.dispose();
+    }//GEN-LAST:event_jButtonRetornarActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -214,9 +240,9 @@ public class Selecionar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonRetornar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelSelecao;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableDados;
     private javax.swing.JTextField jTextFieldPesquisar;

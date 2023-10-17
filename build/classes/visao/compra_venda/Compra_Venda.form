@@ -99,7 +99,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jButtonSelecionarClientes" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="jButton2" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="jButtonSelecionarProdutos" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -156,7 +156,7 @@
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldIdProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldNomeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonSelecionarProdutos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -254,15 +254,21 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldIdProduto">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldIdProdutoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNomeProduto">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="jButtonSelecionarProdutos">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imagens/pesquisar-pequeno.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelecionarProdutosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldQuantidade">
     </Component>
