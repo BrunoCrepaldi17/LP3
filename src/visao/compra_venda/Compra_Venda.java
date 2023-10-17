@@ -7,6 +7,7 @@ package visao.compra_venda;
 
 import javax.swing.table.DefaultTableModel;
 import visao.DadosDeSessao;
+import visao.Selecionar;
 
 /**
  *
@@ -38,9 +39,9 @@ public class Compra_Venda extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jTextFieldIdCliente = new javax.swing.JTextField();
+        jTextFieldNomeCliente = new javax.swing.JTextField();
+        jButtonSelecionarClientes = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldIdProduto = new javax.swing.JTextField();
@@ -86,13 +87,18 @@ public class Compra_Venda extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Compra", "Venda" }));
 
-        jButton1.setText("jButton1");
+        jButtonSelecionarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
+        jButtonSelecionarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarClientesActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Produto");
 
         jLabel5.setText("Qtd.");
 
-        jButton2.setText("jButton2");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
 
         jLabel6.setText("Valor Unit.");
 
@@ -107,10 +113,7 @@ public class Compra_Venda extends javax.swing.JFrame {
 
         jTableDados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Produto", "Un. Medida", "Qtd.", "Valor Un.", "Total"
@@ -168,7 +171,7 @@ public class Compra_Venda extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
+                            .addComponent(jTextFieldIdCliente)
                             .addComponent(jTextFieldIdProduto)
                             .addComponent(jTextFieldQuantidade))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -180,10 +183,10 @@ public class Compra_Venda extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextFieldNomeProduto)
-                                    .addComponent(jTextField2))
+                                    .addComponent(jTextFieldNomeCliente))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonSelecionarClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(87, 87, 87)
@@ -219,9 +222,9 @@ public class Compra_Venda extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jTextFieldIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSelecionarClientes))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -267,9 +270,9 @@ public class Compra_Venda extends javax.swing.JFrame {
         Double qtd = Double.parseDouble(jTextFieldQuantidade.getText().replaceAll(",", "."));
         Double valorUnit = Double.parseDouble(jTextFieldValorUnitario.getText().replaceAll(",", "."));
         Double valorTotal = qtd * valorUnit;
-        
+
         DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
-        
+
         String[] linha = {
             idProduto.toString(),
             nome,
@@ -279,6 +282,15 @@ public class Compra_Venda extends javax.swing.JFrame {
         };
         modelo.addRow(linha);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButtonSelecionarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarClientesActionPerformed
+        new Selecionar(
+                jTextFieldIdCliente,
+                jTextFieldNomeCliente,
+                "cliente",
+                "nome"
+        ).setVisible(true);
+    }//GEN-LAST:event_jButtonSelecionarClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,12 +328,12 @@ public class Compra_Venda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButtonSelecionarClientes;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -337,11 +349,11 @@ public class Compra_Venda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableDados;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextFieldIdCliente;
     private javax.swing.JTextField jTextFieldIdProduto;
+    private javax.swing.JTextField jTextFieldNomeCliente;
     private javax.swing.JTextField jTextFieldNomeProduto;
     private javax.swing.JTextField jTextFieldQuantidade;
     private javax.swing.JTextField jTextFieldValorUnitario;

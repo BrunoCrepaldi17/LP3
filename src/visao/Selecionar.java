@@ -5,15 +5,35 @@
  */
 package visao;
 
+import controlador.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author bcrep
  */
 public class Selecionar extends javax.swing.JFrame {
 
+    private JTextField campoId;
+    private JTextField campoDescricao;
+    private String tabela = "cliente";
+    private String descricao = "nome";
+
     /**
      * Creates new form Selecionar
      */
+    
+    public Selecionar (JTextField campoId, JTextField campoDescricao,
+            String tabela, String descricao){
+        this.campoId = campoId;
+        this.campoDescricao = campoDescricao;
+        this.tabela = tabela;
+        this.descricao = descricao;
+    }
     public Selecionar() {
         initComponents();
     }
@@ -30,7 +50,7 @@ public class Selecionar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableDados = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldPesquisar = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -39,10 +59,7 @@ public class Selecionar extends javax.swing.JFrame {
 
         jTableDados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Código", "Descrição"
@@ -51,6 +68,17 @@ public class Selecionar extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableDados);
 
         jLabel1.setText("Pesquisar");
+
+        jTextFieldPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPesquisarActionPerformed(evt);
+            }
+        });
+        jTextFieldPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPesquisarKeyReleased(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
 
@@ -74,7 +102,7 @@ public class Selecionar extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -92,11 +120,11 @@ public class Selecionar extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -104,9 +132,54 @@ public class Selecionar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void preencherTabela(String pesquisa) {
+        /*select id, (descricao) 
+               from (tabela) 
+               where (descricao) like '%pesquisar%'
+               order by (descricao)
+         */
+
+        try {
+            DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
+            modelo.setNumRows(0);
+            
+            Connection conexao = Conexao.getConexao();
+            String sql = "select id, " + this.descricao
+                    + " from " + this.tabela
+                    + " where " + this.descricao + " like? "
+                    + " order by " + this.descricao;
+            
+            System.out.println(sql);
+            
+            try (PreparedStatement ps = conexao.prepareStatement(sql)){
+                
+                    ps.setString(1, "%" + pesquisa + "%");  
+                    
+                ResultSet rs = ps.executeQuery();
+                
+                while(rs.next()){
+                    String linha[] = {rs.getString("id"), rs.getString(this.descricao)};
+                    modelo.addRow(linha);
+                }
+            } 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void jTextFieldPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarActionPerformed
+
+    }//GEN-LAST:event_jTextFieldPesquisarActionPerformed
+
+    private void jTextFieldPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarKeyReleased
+              String campoPesquisa = jTextFieldPesquisar.getText().trim();
+
+        if (campoPesquisa.equals("")) {
+            preencherTabela(campoPesquisa);
+        }
+
+    }//GEN-LAST:event_jTextFieldPesquisarKeyReleased
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -134,7 +207,7 @@ public class Selecionar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Selecionar().setVisible(true);
+                new Selecionar(null, null, "cliente", "nome").setVisible(true);
             }
         });
     }
@@ -146,6 +219,6 @@ public class Selecionar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableDados;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldPesquisar;
     // End of variables declaration//GEN-END:variables
 }
