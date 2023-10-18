@@ -87,6 +87,10 @@ public class Compra_Venda extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Compra", "Venda" }));
 
+        jTextFieldIdCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextFieldNomeCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jButtonSelecionarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
         jButtonSelecionarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,11 +102,14 @@ public class Compra_Venda extends javax.swing.JFrame {
 
         jLabel5.setText("Qtd.");
 
+        jTextFieldIdProduto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldIdProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdProdutoActionPerformed(evt);
             }
         });
+
+        jTextFieldNomeProduto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jButtonSelecionarProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
         jButtonSelecionarProdutos.addActionListener(new java.awt.event.ActionListener() {
