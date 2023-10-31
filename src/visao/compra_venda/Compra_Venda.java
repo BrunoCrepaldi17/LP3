@@ -339,6 +339,14 @@ public class Compra_Venda extends javax.swing.JFrame {
         
         //cria o objeto compravenda
         CompraVenda cv = new CompraVenda();
+        cv.setOperacao(operacao.substring(0,1));// "C" ou "V"
+        cv.setCliente_id(cliente_id);
+        cv.setFormaPagamento(formaPagamento);
+        cv.setDesconto(desconto);
+        
+        
+        //percorrer todos os produtos para adicionar no compravenda
+        
 
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
