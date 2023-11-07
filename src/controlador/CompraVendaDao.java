@@ -5,6 +5,9 @@
  */
 package controlador;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import modelo.CompraVenda;
 
 /**
@@ -12,7 +15,24 @@ import modelo.CompraVenda;
  * @author bcrep
  */
 public class CompraVendaDao {
-    public boolean inserir(CompraVenda obj) throws Exception{
-        return true;
+    public int inserir(CompraVenda obj) throws Exception{
+      int retorno;
+        
+        String sql = "insert into compravenda (operacao, cliente_id, formapagamento, desconto)"
+                + "values (?, ?, ?, ?)";
+
+        Connection conexao = Conexao.getConexao();
+        try (PreparedStatement ps = conexao.prepareStatement(sql)) {
+
+            ps.setString(1, obj.getOperacao());
+            ps.setInt(2, obj.getCliente_id());
+            ps.setInt(3, obj.getFormaPagamento());
+            ps.setDouble(4, obj.getDesconto());
+
+            retorno = ps.executeUpdate();
+        }
+        
+        return retorno;
     }
+
 }

@@ -14,8 +14,8 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
     public List<Usuariogrupo> userGroupsList;
 
     public UsuarioCadastrar() {
-        this.setTitle(DadosDeSessao.nomeSistema + "-"
-                + DadosDeSessao.getUsuario().getNome());
+        this.setTitle(DadosDeSessao.nomeSistema);
+                
         initComponents();
         inserirDados();
     }
