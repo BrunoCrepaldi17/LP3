@@ -13,7 +13,7 @@ public class CompraVenda {
     private String operacao;
     private int cliente_id;
     private Double desconto;
-    private Integer formaPagamento;
+    private int formaPagamento;
     private List<CompraVendaProduto> produto = new ArrayList<>();
 
     public int getCliente_id() {
@@ -40,7 +40,6 @@ public class CompraVenda {
         this.operacao = operacao;
     }
 
-
     public Double getDesconto() {
         return desconto;
     }
@@ -65,4 +64,44 @@ public class CompraVenda {
         this.produto = produto;
     }
 
+    public void setFormaPagamento(String formaPagamento) {
+        if (formaPagamento.equalsIgnoreCase("dinheiro")) {
+            this.formaPagamento = 1;
+            return;
+        }
+        if (formaPagamento.equalsIgnoreCase("Cartão de crédito")) {
+            this.formaPagamento = 2;
+            return;
+        }
+        if (formaPagamento.equalsIgnoreCase("Cartão de Débito")) {
+            this.formaPagamento = 3;
+            return;
+        }
+        if (formaPagamento.equalsIgnoreCase("PIX")) {
+            this.formaPagamento = 4;
+            return;
+        }
+        if (formaPagamento.equalsIgnoreCase("Boleto")) {
+            this.formaPagamento = 5;
+            return;
+        }
+
+        this.formaPagamento = 1;
+    }
+    public String getFormapagamentoDescricao() {
+        switch (this.formaPagamento) {
+            case 1:
+                return "Dinheiro";
+            case 2:
+                return"Cartão de Crédito";
+            case 3 :
+                return "Cartão de Débito";
+            case 4 :
+                return "PIX";
+            case 5 :
+                return "Boleto";
+            default  :
+                return "Não especificado";
+        }
+    }
 }

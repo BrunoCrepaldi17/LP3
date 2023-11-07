@@ -145,7 +145,12 @@ public class Compra_Venda extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableDados);
 
-        jComboBoxFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dinheiro", "Pix", "Cartão" }));
+        jComboBoxFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dinheiro", "Pix", "Cartão de Crédito", "Cartão de Débito", "Boleto" }));
+        jComboBoxFormaPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFormaPagamentoActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Forma de Pagamento:");
 
@@ -329,16 +334,18 @@ public class Compra_Venda extends javax.swing.JFrame {
         new Selecionar(
                 jTextFieldIdProduto,
                 jTextFieldNomeProduto,
-                "Produto",
+                "produto",
                 "nome"
         ).setVisible(true);
     }//GEN-LAST:event_jButtonSelecionarProdutosActionPerformed
 
+    
+    
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
        //pega os dados para inserir em compravenda
         String operacao = jComboBoxOperacao.getSelectedItem().toString();
+        String formaPagamento = jComboBoxFormaPagamento.getSelectedItem().toString();
         int cliente_id = Integer.valueOf(jTextFieldIdCliente.getText());
-        int formaPagamento = Integer.valueOf(jComboBoxFormaPagamento.getSelectedItem().toString());
         double desconto = Double.valueOf(jTextFieldDesconto.getText());
         
         //cria o objeto compravenda
@@ -363,6 +370,10 @@ public class Compra_Venda extends javax.swing.JFrame {
 
        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jComboBoxFormaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFormaPagamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFormaPagamentoActionPerformed
 
     /**
      * @param args the command line arguments
