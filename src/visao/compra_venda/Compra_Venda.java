@@ -5,6 +5,10 @@
  */
 package visao.compra_venda;
 
+import controlador.CompraVendaDao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 import modelo.CompraVenda;
@@ -346,8 +350,18 @@ public class Compra_Venda extends javax.swing.JFrame {
         
         
         //percorrer todos os produtos para adicionar no compravenda
+        DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
+        CompraVendaDao dao = new CompraVendaDao();
         
+        try {
+            dao.inserir(cv);
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + ex.getMessage());
+        }
 
+       
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
