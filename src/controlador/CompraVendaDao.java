@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import modelo.CompraVenda;
+import modelo.CompraVendaProduto;
 
 /**
  *
@@ -28,10 +29,20 @@ public class CompraVendaDao {
             ps.setInt(3, obj.getFormaPagamento());
             ps.setDouble(4, obj.getDesconto());
 
-            return ps.executeUpdate() == 1;
-        }
-        
-  
-    }
 
+            
+            
+            ps.executeUpdate();
+
+            java.sql.ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                obj.setId(rs.getInt(1));
+            }
+            for (CompraVendaProduto produto : obj.getProduto()){
+                produto.setCompraVenda_id(obj.getId());
+                new CompraVendaProdutoDao().inserir(produto);
+            }
+        }
+        return true;
+    }
 }
