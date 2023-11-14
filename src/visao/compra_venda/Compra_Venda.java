@@ -420,10 +420,12 @@ public class Compra_Venda extends javax.swing.JFrame {
         try {
             dao.inserir(cv, produto);
             
+            JOptionPane.showMessageDialog(this, "Operacao realizada com sucesso");
+            
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + ex.getMessage());
-        }
+        } 
         
 
     }//GEN-LAST:event_jButtonSalvarActionPerformed
