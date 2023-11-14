@@ -6,12 +6,15 @@
 package visao.compra_venda;
 
 import controlador.CompraVendaDao;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 import modelo.CompraVenda;
+import modelo.CompraVendaProduto;
 import visao.DadosDeSessao;
 import visao.Selecionar;
 
@@ -140,7 +143,7 @@ public class Compra_Venda extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Produto", "Un. Medida", "Qtd.", "Valor Un.", "Total"
+                "Codigo", "Produto", "Qtd.", "Valor Un.", "Total"
             }
         ));
         jScrollPane2.setViewportView(jTableDados);
@@ -294,14 +297,52 @@ public class Compra_Venda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Integer idProduto = Integer.parseInt(jTextFieldIdProduto.getText());
+        String productId = jTextFieldIdProduto.getText();
+        
+        if (productId.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Insira o produto"
+            );
+            return;
+        }
+        
+        Integer idProduto = Integer.parseInt(productId);
+        
+        String productName = jTextFieldNomeProduto.getText();
+        
+        if (productName.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Insira o Nome do produto"
+            );
+            return;
+        }
+        
         String nome = jTextFieldNomeProduto.getText();
+        
+        String productQtd = jTextFieldQuantidade.getText();
+        
+        if (productQtd.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Insira a quantidade do produto"
+            );
+            return;
+        }
+        
         Double qtd = Double.parseDouble(jTextFieldQuantidade.getText().replaceAll(",", "."));
+        
+        String productAmount = jTextFieldValorUnitario.getText();
+        
+        if (productAmount.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Insira o valor do produto"
+            );
+            return;
+        }
         Double valorUnit = Double.parseDouble(jTextFieldValorUnitario.getText().replaceAll(",", "."));
+        
         Double valorTotal = qtd * valorUnit;
-
+        
+        JOptionPane.showMessageDialog(this, valorTotal
+        );
+        
         DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
-
+        
         String[] linha = {
             idProduto.toString(),
             nome,
@@ -329,39 +370,62 @@ public class Compra_Venda extends javax.swing.JFrame {
         new Selecionar(
                 jTextFieldIdProduto,
                 jTextFieldNomeProduto,
-                "Produto",
+                "produto",
                 "nome"
         ).setVisible(true);
     }//GEN-LAST:event_jButtonSelecionarProdutosActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-       //pega os dados para inserir em compravenda
+        //pega os dados para inserir em compravenda
         String operacao = jComboBoxOperacao.getSelectedItem().toString();
         int cliente_id = Integer.valueOf(jTextFieldIdCliente.getText());
-        int formaPagamento = Integer.valueOf(jComboBoxFormaPagamento.getSelectedItem().toString());
-        double desconto = Double.valueOf(jTextFieldDesconto.getText());
-        
+        String formaPagamento = jComboBoxFormaPagamento.getSelectedItem().toString();
+        double desconto = Double.valueOf(jTextFieldDesconto.getText().replaceAll(",", "."));
+
         //cria o objeto compravenda
         CompraVenda cv = new CompraVenda();
-        cv.setOperacao(operacao.substring(0,1));// "C" ou "V"
+        cv.setOperacao(operacao.substring(0, 1));// "C" ou "V"
         cv.setCliente_id(cliente_id);
         cv.setFormaPagamento(formaPagamento);
         cv.setDesconto(desconto);
-        
-        
+
         //percorrer todos os produtos para adicionar no compravenda
         DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
         CompraVendaDao dao = new CompraVendaDao();
         
+        Integer row = modelo.getRowCount();
+        Integer columns = modelo.getColumnCount();
+        
+        System.out.println("row");
+        System.out.println(row);
+        System.out.println("column");
+        System.out.println(columns);
+        
+        List<CompraVendaProduto> produto = new ArrayList<>();
+        
+        for (int i = 0; i < row; i++) {
+            List<Object> rowProduct = new ArrayList<>();
+            
+            for (int j = 0; j < columns; j++) {
+                rowProduct.add(modelo.getValueAt(i, j));
+            }
+            Integer productId = Integer.parseInt(rowProduct.get(0).toString());
+            Double productQuantity = Double.parseDouble(rowProduct.get(2).toString());
+            Double productPrice = Double.parseDouble(rowProduct.get(3).toString());
+            
+            CompraVendaProduto compraVendaProduto = new CompraVendaProduto(productId, productQuantity, productPrice);
+            produto.add(compraVendaProduto);
+        }
+        System.out.println(produto.size());
         try {
-            dao.inserir(cv);
+            dao.inserir(cv, produto);
             
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + ex.getMessage());
         }
+        
 
-       
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**

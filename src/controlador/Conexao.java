@@ -10,9 +10,9 @@ public class Conexao {
     private Conexao() throws Exception {
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
-            String url = "jdbc:mysql://127.0.0.1:3306/java";
+            String url = "jdbc:mysql://127.0.0.1:3306/IF_SYS_BRUNAO";
             String usuario = "root";
-            String senha = "";
+            String senha = "Nhpd1906.";
 
             Class.forName(driver);
             conexao = DriverManager.getConnection(url, usuario, senha);

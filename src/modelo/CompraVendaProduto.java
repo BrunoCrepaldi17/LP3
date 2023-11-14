@@ -10,10 +10,17 @@ package modelo;
  * @author bcrep
  */
 public class CompraVendaProduto {
+
     private int id;
     private int produto_id;
     private Double quantidade;
     private Double valorUnitario;
+
+    public CompraVendaProduto(int produto_id, Double quantidade, Double valorUnitario) {
+        this.produto_id = produto_id;
+        this.quantidade = quantidade;
+        this.valorUnitario = valorUnitario;
+    }
 
     public int getId() {
         return id;

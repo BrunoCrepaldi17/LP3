@@ -40,7 +40,6 @@ public class CompraVenda {
         this.operacao = operacao;
     }
 
-
     public Double getDesconto() {
         return desconto;
     }
@@ -65,4 +64,49 @@ public class CompraVenda {
         this.produto = produto;
     }
 
+    public void setFormaPagamento(String formaPagamento) {
+        if (formaPagamento.equalsIgnoreCase("dinheiro")) {
+            this.formaPagamento = 1;
+            return;
+        }
+        if (formaPagamento.equalsIgnoreCase("Cartão de crédito")) {
+            this.formaPagamento = 2;
+            return;
+        }
+        if (formaPagamento.equalsIgnoreCase("Cartão de Débito")) {
+            this.formaPagamento = 3;
+            return;
+        }
+        if (formaPagamento.equalsIgnoreCase("PIX")) {
+            this.formaPagamento = 4;
+            return;
+        }
+        if (formaPagamento.equalsIgnoreCase("Boleto")) {
+            this.formaPagamento = 5;
+            return;
+        }
+
+        this.formaPagamento = 1;
+    }
+
+    public String getNomeFormaPagamento(int formaPagamento) {
+
+        if (formaPagamento == 1) {
+            return "Dinheiro";
+        }
+        if (formaPagamento == 2) {
+            return "Cartão de crédito";
+        }
+        if (formaPagamento == 3) {
+            return "Cartão de Débito";
+        }
+        if (formaPagamento == 4) {
+            return "PIX";
+        }
+        if (formaPagamento == 5) {
+            return "Boleto";
+        }
+        
+        return "Dinheiro";
+    }
 }
