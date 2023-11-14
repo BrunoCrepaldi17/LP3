@@ -16,8 +16,9 @@ import modelo.CompraVendaProduto;
  * @author bcrep
  */
 public class CompraVendaDao {
-    public boolean inserir(CompraVenda obj) throws Exception{
-        
+
+    public boolean inserir(CompraVenda obj) throws Exception {
+
         String sql = "insert into compravenda (operacao, cliente_id, formapagamento, desconto)"
                 + "values (?, ?, ?, ?)";
 
@@ -29,16 +30,15 @@ public class CompraVendaDao {
             ps.setInt(3, obj.getFormaPagamento());
             ps.setDouble(4, obj.getDesconto());
 
-
-            
-            
             ps.executeUpdate();
-
+// pega e seta id compravenda
             java.sql.ResultSet rs = ps.getGeneratedKeys();
-            if(rs.next()){
+            if (rs.next()) {
                 obj.setId(rs.getInt(1));
             }
-            for (CompraVendaProduto produto : obj.getProduto()){
+            
+ //inseri produtos
+            for (CompraVendaProduto produto : obj.getProduto()) {
                 produto.setCompraVenda_id(obj.getId());
                 new CompraVendaProdutoDao().inserir(produto);
             }
