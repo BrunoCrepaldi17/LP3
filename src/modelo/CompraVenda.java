@@ -14,8 +14,11 @@ public class CompraVenda {
     private int cliente_id;
     private Double desconto;
     private int formaPagamento;
-    private List<CompraVendaProduto> produto = new ArrayList<>();
+    private List<CompraVendaProduto> produtos = new ArrayList<>();
 
+    public void addProduto (CompraVendaProduto produto){
+        this.produtos.add(produto);
+    }
     public int getCliente_id() {
         return cliente_id;
     }
@@ -57,11 +60,11 @@ public class CompraVenda {
     }
 
     public List<CompraVendaProduto> getProduto() {
-        return produto;
+        return produtos;
     }
 
-    public void setProduto(List<CompraVendaProduto> produto) {
-        this.produto = produto;
+    public void setProduto(List<CompraVendaProduto> produtos) {
+        this.produtos = produtos;
     }
 
     public void setFormaPagamento(String formaPagamento) {

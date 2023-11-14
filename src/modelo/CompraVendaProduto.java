@@ -11,6 +11,7 @@ package modelo;
  */
 public class CompraVendaProduto {
     private int id;
+    private int CompraVenda_id;
     private int produto_id;
     private Double quantidade;
     private Double valorUnitario;
@@ -46,4 +47,13 @@ public class CompraVendaProduto {
     public void setValorUnitario(Double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
+
+    public int getCompraVenda_id() {
+        return CompraVenda_id;
+    }
+
+    public void setCompraVenda_id(int CompraVenda_id) {
+        this.CompraVenda_id = CompraVenda_id;
+    }
+    
 }

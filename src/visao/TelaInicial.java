@@ -43,6 +43,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItemCliente = new javax.swing.JMenuItem();
         jMenuItemProduto = new javax.swing.JMenuItem();
         jMenuItemCP = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -94,6 +95,14 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItemCP);
+
+        jMenuItem1.setText("Compra Venda");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
@@ -148,6 +157,10 @@ public class TelaInicial extends javax.swing.JFrame {
         new visao.produtocategoria.ProdutocategoriaGerenciar().setVisible(true);
     }//GEN-LAST:event_jMenuItemCPActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new visao.compra_venda.Compra_Venda().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -193,6 +206,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuGerUsu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemCP;
     private javax.swing.JMenuItem jMenuItemCliente;
