@@ -59,7 +59,7 @@ public class Compra_Venda extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextFieldValorUnitario = new javax.swing.JTextField();
         jButtonAdd = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonRemove = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableDados = new javax.swing.JTable();
         jComboBoxFormaPagamento = new javax.swing.JComboBox<>();
@@ -67,7 +67,7 @@ public class Compra_Venda extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTextFieldDesconto = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        jTextFieldTotal = new javax.swing.JTextField();
         jButtonSalvar = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
@@ -126,7 +126,11 @@ public class Compra_Venda extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldQuantidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jLabel6.setText("Valor Unit.");
+
+        jTextFieldValorUnitario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jButtonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -135,10 +139,10 @@ public class Compra_Venda extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
+        jButtonRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonRemoveActionPerformed(evt);
             }
         });
 
@@ -147,7 +151,7 @@ public class Compra_Venda extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Produto", "Un. Medida", "Qtd.", "Valor Un.", "Total"
+                "Codigo", "Produto", "Qtd.", "Valor Un.", "Total"
             }
         ));
         jScrollPane2.setViewportView(jTableDados);
@@ -163,12 +167,19 @@ public class Compra_Venda extends javax.swing.JFrame {
 
         jLabel8.setText("Desconto:");
 
+        jTextFieldDesconto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldDesconto.setText("0");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("Valor Total:");
 
-        jTextField8.setText("0");
+        jTextFieldTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldTotal.setText("0");
+        jTextFieldTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTotalActionPerformed(evt);
+            }
+        });
 
         jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jButtonSalvar.setText("Salvar");
@@ -191,7 +202,7 @@ public class Compra_Venda extends javax.swing.JFrame {
                         .addGap(209, 209, 209)
                         .addComponent(jButtonAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4))
+                        .addComponent(jButtonRemove))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(jLabel1)))
@@ -237,7 +248,7 @@ public class Compra_Venda extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +292,7 @@ public class Compra_Venda extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonAdd)
-                    .addComponent(jButton4))
+                    .addComponent(jButtonRemove))
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -290,7 +301,7 @@ public class Compra_Venda extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
                         .addComponent(jTextFieldDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,12 +317,45 @@ public class Compra_Venda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        //validações
+        if (jTextFieldQuantidade.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe a quantidade.");
+            jTextFieldQuantidade.requestFocus();
+            return;
+        }
+        if (jTextFieldValorUnitario.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o valor unitario.");
+            jTextFieldValorUnitario.requestFocus();
+            return;
+        }
+        if (jTextFieldNomeProduto.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o nome do produto");
+            jTextFieldNomeProduto.requestFocus();
+            return;
+        }
+        if (jTextFieldIdProduto.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o código do produto");
+            jTextFieldIdProduto.requestFocus();
+            return;
+        }
+        if (jTextFieldNomeCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o nome do cliente");
+            jTextFieldNomeCliente.requestFocus();
+            return;
+        }
+         if (jTextFieldIdCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o código do cliente");
+            jTextFieldIdCliente.requestFocus();
+            return;
+        }
+        
         Integer idProduto = Integer.parseInt(jTextFieldIdProduto.getText());
         String nome = jTextFieldNomeProduto.getText();
         Double qtd = Double.parseDouble(jTextFieldQuantidade.getText().replaceAll(",", "."));
         Double valorUnit = Double.parseDouble(jTextFieldValorUnitario.getText().replaceAll(",", "."));
         Double valorTotal = qtd * valorUnit;
-
+        
+        
         DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
 
         String[] linha = {
@@ -320,7 +364,9 @@ public class Compra_Venda extends javax.swing.JFrame {
             valorUnit.toString(),
             valorTotal.toString()
         };
+ 
         modelo.addRow(linha);
+        
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonSelecionarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarClientesActionPerformed
@@ -347,7 +393,10 @@ public class Compra_Venda extends javax.swing.JFrame {
 
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        //pega os dados para inserir em compravenda
+
+        
+        
+//pega os dados para inserir em compravenda
         String operacao = jComboBoxOperacao.getSelectedItem().toString();
         String formaPagamento = jComboBoxFormaPagamento.getSelectedItem().toString();
         int cliente_id = Integer.valueOf(jTextFieldIdCliente.getText());
@@ -369,10 +418,10 @@ public class Compra_Venda extends javax.swing.JFrame {
             Double valorUn = Double.parseDouble(tabela.getValueAt(linha, 4).toString());
 
             CompraVendaProduto produto = new CompraVendaProduto();
-            produto.setId(id);
+            produto.setProduto_id(id);
             produto.setQuantidade(quantidade);
             produto.setValorUnitario(valorUn);
-            
+
             cv.addProduto(produto);
 
         }
@@ -380,6 +429,7 @@ public class Compra_Venda extends javax.swing.JFrame {
         CompraVendaDao dao = new CompraVendaDao();
         try {
             dao.inserir(cv);
+            JOptionPane.showMessageDialog(this, "Cadastro inserido com sucesso");
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -390,12 +440,16 @@ public class Compra_Venda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jComboBoxFormaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFormaPagamentoActionPerformed
-       
+
     }//GEN-LAST:event_jComboBoxFormaPagamentoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
+
+    }//GEN-LAST:event_jButtonRemoveActionPerformed
+
+    private void jTextFieldTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTotalActionPerformed
         
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jTextFieldTotalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -433,9 +487,9 @@ public class Compra_Venda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButtonAdd;
+    private javax.swing.JButton jButtonRemove;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonSelecionarClientes;
     private javax.swing.JButton jButtonSelecionarProdutos;
@@ -454,13 +508,13 @@ public class Compra_Venda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableDados;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextFieldDesconto;
     private javax.swing.JTextField jTextFieldIdCliente;
     private javax.swing.JTextField jTextFieldIdProduto;
     private javax.swing.JTextField jTextFieldNomeCliente;
     private javax.swing.JTextField jTextFieldNomeProduto;
     private javax.swing.JTextField jTextFieldQuantidade;
+    private javax.swing.JTextField jTextFieldTotal;
     private javax.swing.JTextField jTextFieldValorUnitario;
     // End of variables declaration//GEN-END:variables
 }

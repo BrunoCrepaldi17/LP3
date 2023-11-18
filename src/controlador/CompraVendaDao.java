@@ -23,7 +23,7 @@ public class CompraVendaDao {
                 + "values (?, ?, ?, ?)";
 
         Connection conexao = Conexao.getConexao();
-        try (PreparedStatement ps = conexao.prepareStatement(sql)) {
+        try (PreparedStatement ps = conexao.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, obj.getOperacao());
             ps.setInt(2, obj.getCliente_id());

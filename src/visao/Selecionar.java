@@ -159,7 +159,7 @@ public class Selecionar extends javax.swing.JFrame {
                     + " where " + this.descricao + " like? "
                     + " order by " + this.descricao;
             
-            System.out.println(sql);
+            //System.out.println(sql);
             
             try (PreparedStatement ps = conexao.prepareStatement(sql)){
                 
