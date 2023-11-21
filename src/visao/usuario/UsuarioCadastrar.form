@@ -184,7 +184,7 @@
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Grupo:"/>
+        <Property name="text" type="java.lang.String" value="Grupo de Usu&#xe1;rio:"/>
       </Properties>
     </Component>
   </SubComponents>
