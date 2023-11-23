@@ -154,6 +154,7 @@ public class Selecionar extends javax.swing.JFrame {
             modelo.setNumRows(0);
             
             Connection conexao = Conexao.getConexao();
+          
             String sql = "select id, " + this.descricao
                     + " from " + this.tabela
                     + " where " + this.descricao + " like? "

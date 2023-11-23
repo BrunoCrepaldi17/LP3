@@ -7,17 +7,18 @@ import java.sql.Date;
  * @author bcrep
  */
 public class Cliente {
-     private Integer id;
+
+    private Integer id;
     private String nome;
     private Integer tipocliente;
-    private String cpfcnpj ;
+    private String cpfcnpj;
     private String telefone;
     private String email;
     private String observacao;
     private Date datacadastro;
 
-    public Cliente(Integer id, String nome, Integer tipocliente, 
-    String cpfcnpj, String telefone, String email, String observacao, Date datacadastro) {
+    public Cliente(Integer id, String nome, Integer tipocliente,
+            String cpfcnpj, String telefone, String email, String observacao, Date datacadastro) {
         this.id = id;
         this.nome = nome;
         this.tipocliente = tipocliente;
@@ -29,11 +30,21 @@ public class Cliente {
     }
 
     public Cliente() {
-     }
+    }
 
     public Cliente(Object object, String nome, Integer tipocliente, String cpfcnpj, String telefone, String email, String observacao) {
-       }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         this.id = id;
+        this.nome = nome;
+        this.tipocliente = tipocliente;
+        this.cpfcnpj = cpfcnpj;
+        this.telefone = telefone;
+        this.email = email;
+        this.observacao = observacao;
+        this.datacadastro = datacadastro;
+    }
 
+   
     public Integer getId() {
         return id;
     }

@@ -69,7 +69,7 @@ public class ClienteCadastrar extends javax.swing.JFrame {
         jButtonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar.png"))); // NOI18N
         jButtonLimpar.setText("Limpar");
 
-        jLabel3.setText("Tip de Cliente");
+        jLabel3.setText("Tipo de Cliente");
 
         jLabel4.setText("CPF/CNPJ:");
 
