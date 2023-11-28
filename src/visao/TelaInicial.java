@@ -96,7 +96,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemCP);
 
-        jMenuItem1.setText("Compra Venda");
+        jMenuItem1.setText("Compra e Venda");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -135,6 +135,7 @@ public class TelaInicial extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemGUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGUActionPerformed

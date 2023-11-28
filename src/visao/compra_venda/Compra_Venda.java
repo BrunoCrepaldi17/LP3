@@ -314,6 +314,7 @@ public class Compra_Venda extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
@@ -430,6 +431,7 @@ public class Compra_Venda extends javax.swing.JFrame {
         try {
             dao.inserir(cv);
             JOptionPane.showMessageDialog(this, "Cadastro inserido com sucesso");
+            
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -445,6 +447,12 @@ public class Compra_Venda extends javax.swing.JFrame {
 
     private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
 
+        int linhaSelecionada = jTableDados.getSelectedRow();
+        if (linhaSelecionada == -1) {
+            return;
+        }
+        jTableDados.remove(linhaSelecionada);
+        
     }//GEN-LAST:event_jButtonRemoveActionPerformed
 
     private void jTextFieldTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTotalActionPerformed

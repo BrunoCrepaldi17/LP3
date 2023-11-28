@@ -1,4 +1,5 @@
 package visao.usuario;
+
 import controlador.UsuarioDao;
 import controlador.UsuariogrupoDao;
 import java.util.List;
@@ -15,7 +16,7 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
 
     public UsuarioCadastrar() {
         this.setTitle(DadosDeSessao.nomeSistema);
-                
+
         initComponents();
         inserirDados();
     }
@@ -67,6 +68,11 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
 
         jButtonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar.png"))); // NOI18N
         jButtonLimpar.setText("Limpar");
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimparActionPerformed(evt);
+            }
+        });
 
         groupSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +162,7 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
         }
         return null;
     }
-  
+
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
 
         String nome = jTextFieldNome.getText();
@@ -218,7 +224,15 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
     private void groupSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupSelectActionPerformed
 
     }//GEN-LAST:event_groupSelectActionPerformed
-private void inserirDados() {
+
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        String vazio = "";
+        jTextFieldNome.setText("");
+        jTextFieldEmail.setText("");
+        jPasswordFieldSenha.setText("");
+        jPasswordFieldConfirmacao.setText("");
+    }//GEN-LAST:event_jButtonLimparActionPerformed
+    private void inserirDados() {
         try {
             DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
             UsuariogrupoDao UsuariogrupoDao = new UsuariogrupoDao();
@@ -236,6 +250,7 @@ private void inserirDados() {
             ex.printStackTrace();
         }
     }
+
     /**
      * @param args the command line arguments
      */

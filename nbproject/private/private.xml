@@ -4,13 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema-3Bim_LP3/src/visao/compra_venda/Compra_Venda.java</file>
-            <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema-3Bim_LP3/src/controlador/ProdutoDao.java</file>
-            <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema-3Bim_LP3/src/visao/Selecionar.java</file>
-            <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema-3Bim_LP3/src/modelo/CompraVendaProduto.java</file>
-            <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema-3Bim_LP3/src/controlador/CompraVendaDao.java</file>
             <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema-3Bim_LP3/src/modelo/CompraVenda.java</file>
             <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema-3Bim_LP3/src/visao/Login.java</file>
-            <file>file:/C:/Users/bcrep/OneDrive/Documentos/NetBeansProjects/Sistema-3Bim_LP3/src/controlador/CompraVendaProdutoDao.java</file>
         </group>
     </open-files>
 </project-private>
