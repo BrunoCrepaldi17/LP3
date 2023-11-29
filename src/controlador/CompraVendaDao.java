@@ -59,7 +59,7 @@ public class CompraVendaDao {
                 for (int i = 0; i < produtos.size(); i++) {
                     System.out.println(produtos.get(i).toString());
                     Integer vendaId = ts.getInt(1);
-                    this.inserirProduto(vendaId, produtos.get(i));`
+                    this.inserirProduto(vendaId, produtos.get(i));
                 }
             }
             

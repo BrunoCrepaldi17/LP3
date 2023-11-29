@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import modelo.Cliente;
 import modelo.CompraVenda;
 import modelo.CompraVendaProduto;
@@ -70,7 +72,6 @@ public class Compra_Venda extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jButtonSalvar = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,9 +97,26 @@ public class Compra_Venda extends javax.swing.JFrame {
 
         jComboBoxOperacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Compra", "Venda" }));
 
+        jTextFieldIdCliente.setEditable(false);
         jTextFieldIdCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldIdCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIdClienteActionPerformed(evt);
+            }
+        });
 
+        jTextFieldNomeCliente.setEditable(false);
         jTextFieldNomeCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldNomeCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldNomeClienteFocusGained(evt);
+            }
+        });
+        jTextFieldNomeCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNomeClienteActionPerformed(evt);
+            }
+        });
 
         jButtonSelecionarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
         jButtonSelecionarClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +129,7 @@ public class Compra_Venda extends javax.swing.JFrame {
 
         jLabel5.setText("Qtd.");
 
+        jTextFieldIdProduto.setEditable(false);
         jTextFieldIdProduto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldIdProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +137,7 @@ public class Compra_Venda extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldNomeProduto.setEditable(false);
         jTextFieldNomeProduto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jButtonSelecionarProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
@@ -137,6 +157,11 @@ public class Compra_Venda extends javax.swing.JFrame {
         });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jTableDados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,9 +194,6 @@ public class Compra_Venda extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
-        jButton6.setText("Cancelar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,11 +210,11 @@ public class Compra_Venda extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addGap(201, 245, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
@@ -220,7 +242,7 @@ public class Compra_Venda extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButtonSelecionarClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButtonSelecionarProdutos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -229,17 +251,14 @@ public class Compra_Venda extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBoxFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButtonSalvar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton6)))))
+                            .addComponent(jButtonSalvar, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -287,62 +306,76 @@ public class Compra_Venda extends javax.swing.JFrame {
                         .addComponent(jTextFieldDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9)))
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSalvar)
-                    .addComponent(jButton6))
+                .addComponent(jButtonSalvar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cleanForm() {
+        jTextFieldIdProduto.setText("");
+        jTextFieldNomeProduto.setText("");
+        jTextFieldQuantidade.setText("");
+        jTextFieldValorUnitario.setText("");
+    }
+
+    private void calcTotalValue() {
+        double total = 0;
+        int columnToCount = 4;
+        for (int i = 0; i < jTableDados.getRowCount(); i++) {
+            double value = Double.parseDouble((String) jTableDados.getValueAt(i, columnToCount));
+            total += value;
+        }
+        System.out.println(total);
+        jTextField8.setText(String.valueOf(total));
+    }
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String productId = jTextFieldIdProduto.getText();
-        
+
         if (productId.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Insira o produto"
             );
             return;
         }
-        
+
         Integer idProduto = Integer.parseInt(productId);
-        
+
         String productName = jTextFieldNomeProduto.getText();
-        
+
         if (productName.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Insira o Nome do produto"
             );
             return;
         }
-        
+
         String nome = jTextFieldNomeProduto.getText();
-        
+
         String productQtd = jTextFieldQuantidade.getText();
-        
+
         if (productQtd.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Insira a quantidade do produto"
             );
             return;
         }
-        
+
         Double qtd = Double.parseDouble(jTextFieldQuantidade.getText().replaceAll(",", "."));
-        
+
         String productAmount = jTextFieldValorUnitario.getText();
-        
+
         if (productAmount.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Insira o valor do produto"
             );
             return;
         }
         Double valorUnit = Double.parseDouble(jTextFieldValorUnitario.getText().replaceAll(",", "."));
-        
+
         Double valorTotal = qtd * valorUnit;
-        
-        JOptionPane.showMessageDialog(this, valorTotal
-        );
-        
+
         DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
-        
+
         String[] linha = {
             idProduto.toString(),
             nome,
@@ -351,6 +384,9 @@ public class Compra_Venda extends javax.swing.JFrame {
             valorTotal.toString()
         };
         modelo.addRow(linha);
+
+        cleanForm();
+        calcTotalValue();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButtonSelecionarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarClientesActionPerformed
@@ -379,9 +415,10 @@ public class Compra_Venda extends javax.swing.JFrame {
         //pega os dados para inserir em compravenda
         String operacao = jComboBoxOperacao.getSelectedItem().toString();
         int cliente_id = Integer.valueOf(jTextFieldIdCliente.getText());
+        System.out.println(cliente_id);
         String formaPagamento = jComboBoxFormaPagamento.getSelectedItem().toString();
         double desconto = Double.valueOf(jTextFieldDesconto.getText().replaceAll(",", "."));
-
+        System.out.println(desconto);
         //cria o objeto compravenda
         CompraVenda cv = new CompraVenda();
         cv.setOperacao(operacao.substring(0, 1));// "C" ou "V"
@@ -392,43 +429,69 @@ public class Compra_Venda extends javax.swing.JFrame {
         //percorrer todos os produtos para adicionar no compravenda
         DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
         CompraVendaDao dao = new CompraVendaDao();
-        
+
         Integer row = modelo.getRowCount();
         Integer columns = modelo.getColumnCount();
-        
-        System.out.println("row");
-        System.out.println(row);
-        System.out.println("column");
-        System.out.println(columns);
-        
+
         List<CompraVendaProduto> produto = new ArrayList<>();
-        
+
         for (int i = 0; i < row; i++) {
             List<Object> rowProduct = new ArrayList<>();
-            
+
             for (int j = 0; j < columns; j++) {
                 rowProduct.add(modelo.getValueAt(i, j));
             }
             Integer productId = Integer.parseInt(rowProduct.get(0).toString());
             Double productQuantity = Double.parseDouble(rowProduct.get(2).toString());
             Double productPrice = Double.parseDouble(rowProduct.get(3).toString());
-            
+
             CompraVendaProduto compraVendaProduto = new CompraVendaProduto(productId, productQuantity, productPrice);
             produto.add(compraVendaProduto);
         }
-        System.out.println(produto.size());
         try {
             dao.inserir(cv, produto);
-            
+
             JOptionPane.showMessageDialog(this, "Operacao realizada com sucesso");
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + ex.getMessage());
-        } 
-        
+        }
+
 
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jTextFieldIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdClienteActionPerformed
+        new Selecionar(
+                jTextFieldIdCliente,
+                jTextFieldNomeCliente,
+                "cliente",
+                "nome"
+        ).setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIdClienteActionPerformed
+
+    private void jTextFieldNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeClienteActionPerformed
+        new Selecionar(
+                jTextFieldIdCliente,
+                jTextFieldNomeCliente,
+                "cliente",
+                "nome"
+        ).setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNomeClienteActionPerformed
+
+    private void jTextFieldNomeClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNomeClienteFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNomeClienteFocusGained
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        int selectedRow = jTableDados.getSelectedRow();
+        if (selectedRow != -1) {
+            DefaultTableModel model = (DefaultTableModel) jTableDados.getModel();
+            model.removeRow(selectedRow);
+            calcTotalValue();   
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -468,7 +531,6 @@ public class Compra_Venda extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonSelecionarClientes;
     private javax.swing.JButton jButtonSelecionarProdutos;

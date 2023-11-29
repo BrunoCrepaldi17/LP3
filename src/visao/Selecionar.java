@@ -26,21 +26,23 @@ public class Selecionar extends javax.swing.JFrame {
     /**
      * Creates new form Selecionar
      */
-    
-    public Selecionar (JTextField campoId, JTextField campoDescricao,
-            String tabela, String descricao){
-        
+    public Selecionar(JTextField campoId, JTextField campoDescricao,
+            String tabela, String descricao) {
+
         initComponents();
-        
+
         this.campoId = campoId;
         this.campoDescricao = campoDescricao;
         this.tabela = tabela;
         this.descricao = descricao;
-        
-        jLabelSelecao.setText(jLabelSelecao.getText()+" "+ tabela);
+
+        jLabelSelecao.setText(jLabelSelecao.getText() + " " + tabela);
+
+        preencherTabela("");
     }
+
     public Selecionar() {
-        
+
     }
 
     /**
@@ -60,7 +62,7 @@ public class Selecionar extends javax.swing.JFrame {
         jLabelSelecao = new javax.swing.JLabel();
         jButtonRetornar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTableDados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,6 +142,7 @@ public class Selecionar extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void preencherTabela(String pesquisa) {
@@ -152,26 +155,26 @@ public class Selecionar extends javax.swing.JFrame {
         try {
             DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
             modelo.setNumRows(0);
-            
+
             Connection conexao = Conexao.getConexao();
             String sql = "select id, " + this.descricao
                     + " from " + this.tabela
                     + " where " + this.descricao + " like? "
                     + " order by " + this.descricao;
-            
+
             System.out.println(sql);
-            
-            try (PreparedStatement ps = conexao.prepareStatement(sql)){
-                
-                    ps.setString(1, "%" + pesquisa + "%");  
-                    
+
+            try (PreparedStatement ps = conexao.prepareStatement(sql)) {
+
+                ps.setString(1, "%" + pesquisa + "%");
+
                 ResultSet rs = ps.executeQuery();
-                
-                while(rs.next()){
+
+                while (rs.next()) {
                     String linha[] = {rs.getString("id"), rs.getString(this.descricao)};
                     modelo.addRow(linha);
                 }
-            } 
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,27 +185,23 @@ public class Selecionar extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldPesquisarActionPerformed
 
     private void jTextFieldPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarKeyReleased
-              String campoPesquisa = jTextFieldPesquisar.getText().trim();
-
-        if (campoPesquisa.equals("")) {
-            preencherTabela(campoPesquisa);
-        }
-
+        String campoPesquisa = jTextFieldPesquisar.getText().trim();
+        preencherTabela(campoPesquisa);
     }//GEN-LAST:event_jTextFieldPesquisarKeyReleased
 
     private void jButtonRetornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetornarActionPerformed
         int linhaSelecionada = jTableDados.getSelectedRow();
-        
+
         String id = "", descricao = "";
-        
+
         if (linhaSelecionada != -1) {
             id = jTableDados.getModel().getValueAt(linhaSelecionada, 0).toString();
             descricao = jTableDados.getModel().getValueAt(linhaSelecionada, 1).toString();
         }
-        
+
         campoId.setText(id);
         campoDescricao.setText(descricao);
-        
+
         this.dispose();
     }//GEN-LAST:event_jButtonRetornarActionPerformed
 

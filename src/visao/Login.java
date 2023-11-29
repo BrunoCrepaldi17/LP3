@@ -11,6 +11,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        jTextFieldEmail.setText("a@a.a");
+        jPasswordFieldSenha.setText("1");
     }
 
     /**
@@ -36,7 +38,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Crepaldi Sistemas IFPR");
+        jLabel1.setText("Delanhese Sistemas IFPR");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Email:");
@@ -126,6 +128,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
