@@ -6,6 +6,7 @@
 package visao.compra_venda;
 
 import controlador.CompraVendaDao;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -40,6 +41,7 @@ public class Compra_Venda extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -97,7 +99,13 @@ public class Compra_Venda extends javax.swing.JFrame {
 
         jTextFieldIdCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTextFieldIdCliente, org.jdesktop.beansbinding.ELProperty.create("false"), jTextFieldIdCliente, org.jdesktop.beansbinding.BeanProperty.create("editable"));
+        bindingGroup.addBinding(binding);
+
         jTextFieldNomeCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTextFieldNomeCliente, org.jdesktop.beansbinding.ELProperty.create("false"), jTextFieldNomeCliente, org.jdesktop.beansbinding.BeanProperty.create("editable"));
+        bindingGroup.addBinding(binding);
 
         jButtonSelecionarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
         jButtonSelecionarClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +119,10 @@ public class Compra_Venda extends javax.swing.JFrame {
         jLabel5.setText("Qtd.");
 
         jTextFieldIdProduto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTextFieldIdProduto, org.jdesktop.beansbinding.ELProperty.create("false"), jTextFieldIdProduto, org.jdesktop.beansbinding.BeanProperty.create("editable"));
+        bindingGroup.addBinding(binding);
+
         jTextFieldIdProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdProdutoActionPerformed(evt);
@@ -118,6 +130,9 @@ public class Compra_Venda extends javax.swing.JFrame {
         });
 
         jTextFieldNomeProduto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTextFieldNomeProduto, org.jdesktop.beansbinding.ELProperty.create("false"), jTextFieldNomeProduto, org.jdesktop.beansbinding.BeanProperty.create("editable"));
+        bindingGroup.addBinding(binding);
 
         jButtonSelecionarProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
         jButtonSelecionarProdutos.addActionListener(new java.awt.event.ActionListener() {
@@ -127,10 +142,20 @@ public class Compra_Venda extends javax.swing.JFrame {
         });
 
         jTextFieldQuantidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldQuantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldQuantidadeActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Valor Unit.");
 
         jTextFieldValorUnitario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldValorUnitario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldValorUnitarioActionPerformed(evt);
+            }
+        });
 
         jButtonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -169,12 +194,23 @@ public class Compra_Venda extends javax.swing.JFrame {
 
         jTextFieldDesconto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldDesconto.setText("0");
+        jTextFieldDesconto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldDescontoActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("Valor Total:");
 
+        jTextFieldTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jTextFieldTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldTotal.setText("0");
+        jTextFieldTotal.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTextFieldTotal, org.jdesktop.beansbinding.ELProperty.create("false"), jTextFieldTotal, org.jdesktop.beansbinding.BeanProperty.create("editable"));
+        bindingGroup.addBinding(binding);
+
         jTextFieldTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTotalActionPerformed(evt);
@@ -301,11 +337,12 @@ public class Compra_Venda extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
-                        .addComponent(jTextFieldDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9)))
+                        .addComponent(jTextFieldDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvar)
@@ -313,9 +350,47 @@ public class Compra_Venda extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        bindingGroup.bind();
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void limparForm() {
+        jTextFieldIdProduto.setText("");
+        jTextFieldNomeProduto.setText("");
+        jTextFieldQuantidade.setText("");
+        jTextFieldValorUnitario.setText("");
+    }
+
+    private void calcTotalColuna() {
+        try {
+            DecimalFormat df = new DecimalFormat("#,###.00");
+            double total = 0;
+            int valorColuna = 4;
+            for (int i = 0; i < jTableDados.getRowCount(); i++) {
+                double value = Double.parseDouble((String) jTableDados.getValueAt(i, valorColuna));
+                total += value;
+            }
+
+            jTextFieldTotal.setText(String.valueOf(df.format(total)));
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "É permitido apenas numeros");
+        }
+    }
+
+    private void calcTotalDesconto() {
+        double desconto = Double.valueOf(jTextFieldDesconto.getText());
+        double total = 0;
+        int valorColuna = 4;
+        for (int i = 0; i < jTableDados.getRowCount(); i++) {
+            double value = Double.parseDouble((String) jTableDados.getValueAt(i, valorColuna));
+            total += value * (0.01 * desconto);
+        }
+        System.out.println(total);
+        jTextFieldTotal.setText(String.valueOf(total));
+    }
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         //validações
@@ -344,19 +419,23 @@ public class Compra_Venda extends javax.swing.JFrame {
             jTextFieldNomeCliente.requestFocus();
             return;
         }
-         if (jTextFieldIdCliente.getText().equals("")) {
+        if (jTextFieldIdCliente.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Informe o código do cliente");
             jTextFieldIdCliente.requestFocus();
             return;
         }
-        
+        /*    if (jTextFieldIdProduto.getText().equals(jTableDados.getValueAt(jTableDados.getSelectedRow(), 0))) {
+            JOptionPane.showMessageDialog(this, "Informe um novo produto");
+            jTextFieldIdProduto.requestFocus();
+            return;
+        }*/
+
         Integer idProduto = Integer.parseInt(jTextFieldIdProduto.getText());
         String nome = jTextFieldNomeProduto.getText();
         Double qtd = Double.parseDouble(jTextFieldQuantidade.getText().replaceAll(",", "."));
         Double valorUnit = Double.parseDouble(jTextFieldValorUnitario.getText().replaceAll(",", "."));
         Double valorTotal = qtd * valorUnit;
-        
-        
+
         DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
 
         String[] linha = {
@@ -365,9 +444,15 @@ public class Compra_Venda extends javax.swing.JFrame {
             valorUnit.toString(),
             valorTotal.toString()
         };
- 
+
         modelo.addRow(linha);
-        
+        limparForm();
+        if (jTextFieldDesconto.getText().equals("0")) {
+            calcTotalColuna();
+        } else {
+            calcTotalDesconto();
+        }
+
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonSelecionarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarClientesActionPerformed
@@ -395,8 +480,6 @@ public class Compra_Venda extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
 
-        
-        
 //pega os dados para inserir em compravenda
         String operacao = jComboBoxOperacao.getSelectedItem().toString();
         String formaPagamento = jComboBoxFormaPagamento.getSelectedItem().toString();
@@ -431,7 +514,6 @@ public class Compra_Venda extends javax.swing.JFrame {
         try {
             dao.inserir(cv);
             JOptionPane.showMessageDialog(this, "Cadastro inserido com sucesso");
-            
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -446,23 +528,35 @@ public class Compra_Venda extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxFormaPagamentoActionPerformed
 
     private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
-
         int linhaSelecionada = jTableDados.getSelectedRow();
         if (linhaSelecionada == -1) {
-            return;
+            DefaultTableModel model = (DefaultTableModel) jTableDados.getModel();
+            model.removeRow(linhaSelecionada);
+            calcTotalColuna();
         }
-        jTableDados.remove(linhaSelecionada);
-        
+
     }//GEN-LAST:event_jButtonRemoveActionPerformed
 
     private void jTextFieldTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTotalActionPerformed
-        
+
     }//GEN-LAST:event_jTextFieldTotalActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    private void jTextFieldDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDescontoActionPerformed
+
+    }//GEN-LAST:event_jTextFieldDescontoActionPerformed
+
+    private void jTextFieldQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQuantidadeActionPerformed
+  
+    }//GEN-LAST:event_jTextFieldQuantidadeActionPerformed
+
+    private void jTextFieldValorUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorUnitarioActionPerformed
+ 
+    }//GEN-LAST:event_jTextFieldValorUnitarioActionPerformed
+
+/**
+ * @param args the command line arguments
+ */
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -473,16 +567,28 @@ public class Compra_Venda extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Compra_Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Compra_Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Compra_Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Compra_Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Compra_Venda.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Compra_Venda.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Compra_Venda.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Compra_Venda.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -524,5 +630,6 @@ public class Compra_Venda extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldQuantidade;
     private javax.swing.JTextField jTextFieldTotal;
     private javax.swing.JTextField jTextFieldValorUnitario;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
