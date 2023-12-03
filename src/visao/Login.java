@@ -11,8 +11,6 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        jTextFieldEmail.setText("a@a.a");
-        jPasswordFieldSenha.setText("1");
     }
 
     /**
