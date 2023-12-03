@@ -372,6 +372,33 @@ public class Compra_Venda extends javax.swing.JFrame {
                 double value = Double.parseDouble((String) jTableDados.getValueAt(i, valorColuna));
                 total += value;
             }
+            if (total == 0) {
+                return;
+            }
+
+            if (jTextFieldDesconto.getText().isEmpty() || jTextFieldDesconto.getText().equals("0")) {
+                jTextFieldTotal.setText(String.valueOf(df.format(total)));
+                return;
+            }
+
+            Double desconto = Double.valueOf(jTextFieldDesconto.getText().replaceAll(",", "."));
+
+            if (desconto < 0) {
+                JOptionPane.showMessageDialog(this, "Insira um desconto valido");
+            }
+
+            if (desconto > 0.01) {
+                Double valorComDesconto = total - Double.valueOf(jTextFieldDesconto.getText());
+
+                if (valorComDesconto < 0) {
+                    JOptionPane.showMessageDialog(this, "Insira um desconto valido");
+                } else {
+                    jTextFieldTotal.setText(String.valueOf(df.format(valorComDesconto)));
+
+                }
+
+                return;
+            }
 
             jTextFieldTotal.setText(String.valueOf(df.format(total)));
 
@@ -380,23 +407,49 @@ public class Compra_Venda extends javax.swing.JFrame {
         }
     }
 
-    private void calcTotalDesconto() {
-        double desconto = Double.valueOf(jTextFieldDesconto.getText());
-        double total = 0;
-        int valorColuna = 4;
-        for (int i = 0; i < jTableDados.getRowCount(); i++) {
-            double value = Double.parseDouble((String) jTableDados.getValueAt(i, valorColuna));
-            total += value * (0.01 * desconto);
+    private boolean produtoTabela(int IdProduto, Double qtd) {
+        DefaultTableModel model = (DefaultTableModel) jTableDados.getModel();
+        int linhas = model.getRowCount();
+
+        if (linhas < 1) {
+            return false;
         }
-        System.out.println(total);
-        jTextFieldTotal.setText(String.valueOf(total));
+
+        for (int i = 0; i < linhas; i++) {
+            int atualIdProduto = Integer.parseInt(model.getValueAt(i, 0).toString());
+
+            if (atualIdProduto == IdProduto) {
+                Double currentQty = Double.valueOf(model.getValueAt(i, 2).toString());
+                model.setValueAt(currentQty + qtd, i, 2);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+
+        Integer idProduto = Integer.parseInt(jTextFieldIdProduto.getText());
+        Double qtd = Double.parseDouble(jTextFieldQuantidade.getText().replaceAll(",", "."));
+        Double valorUnit = Double.parseDouble(jTextFieldValorUnitario.getText().replaceAll(",", "."));
+        boolean produtoTabela = produtoTabela(idProduto, qtd);
+
         //validações
         if (jTextFieldQuantidade.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Informe a quantidade.");
             jTextFieldQuantidade.requestFocus();
+            return;
+        }
+        if (qtd < 0) {
+            JOptionPane.showMessageDialog(this, "Insira uma quantidade válida");
+            limparForm();
+            return;
+        }
+
+        if (valorUnit < 0) {
+            JOptionPane.showMessageDialog(this, "Insira um valor válido");
+            limparForm();
             return;
         }
         if (jTextFieldValorUnitario.getText().equals("")) {
@@ -424,16 +477,14 @@ public class Compra_Venda extends javax.swing.JFrame {
             jTextFieldIdCliente.requestFocus();
             return;
         }
-        /*    if (jTextFieldIdProduto.getText().equals(jTableDados.getValueAt(jTableDados.getSelectedRow(), 0))) {
-            JOptionPane.showMessageDialog(this, "Informe um novo produto");
-            jTextFieldIdProduto.requestFocus();
-            return;
-        }*/
 
-        Integer idProduto = Integer.parseInt(jTextFieldIdProduto.getText());
+        if (produtoTabela) {
+            JOptionPane.showMessageDialog(this, "O produto já está presente na tabela"
+            );
+            return;
+        }
+        //insert na tabela
         String nome = jTextFieldNomeProduto.getText();
-        Double qtd = Double.parseDouble(jTextFieldQuantidade.getText().replaceAll(",", "."));
-        Double valorUnit = Double.parseDouble(jTextFieldValorUnitario.getText().replaceAll(",", "."));
         Double valorTotal = qtd * valorUnit;
 
         DefaultTableModel modelo = (DefaultTableModel) jTableDados.getModel();
@@ -446,13 +497,9 @@ public class Compra_Venda extends javax.swing.JFrame {
         };
 
         modelo.addRow(linha);
-        limparForm();
-        if (jTextFieldDesconto.getText().equals("0")) {
-            calcTotalColuna();
-        } else {
-            calcTotalDesconto();
-        }
 
+        limparForm();
+        calcTotalColuna();
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonSelecionarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarClientesActionPerformed
@@ -513,7 +560,8 @@ public class Compra_Venda extends javax.swing.JFrame {
         CompraVendaDao dao = new CompraVendaDao();
         try {
             dao.inserir(cv);
-            JOptionPane.showMessageDialog(this, "Cadastro inserido com sucesso");
+            JOptionPane.showMessageDialog(this, "Cadastro inserido com sucesso no valor de: R$ " 
+                    + jTextFieldTotal.getText() +" reais");
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -529,7 +577,7 @@ public class Compra_Venda extends javax.swing.JFrame {
 
     private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
         int linhaSelecionada = jTableDados.getSelectedRow();
-        if (linhaSelecionada == -1) {
+        if (linhaSelecionada != -1) {
             DefaultTableModel model = (DefaultTableModel) jTableDados.getModel();
             model.removeRow(linhaSelecionada);
             calcTotalColuna();
@@ -546,17 +594,17 @@ public class Compra_Venda extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldDescontoActionPerformed
 
     private void jTextFieldQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQuantidadeActionPerformed
-  
+
     }//GEN-LAST:event_jTextFieldQuantidadeActionPerformed
 
     private void jTextFieldValorUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorUnitarioActionPerformed
- 
+
     }//GEN-LAST:event_jTextFieldValorUnitarioActionPerformed
 
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -567,28 +615,24 @@ public static void main(String args[]) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Compra_Venda.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(Compra_Venda.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(Compra_Venda.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Compra_Venda.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

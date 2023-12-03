@@ -87,6 +87,11 @@ public class Selecionar extends javax.swing.JFrame {
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar-pequeno.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabelSelecao.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelSelecao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -204,6 +209,22 @@ public class Selecionar extends javax.swing.JFrame {
 
         this.dispose();
     }//GEN-LAST:event_jButtonRetornarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int linhaSelecionada = jTableDados.getSelectedRow();
+
+        String id = "", descricao = "";
+
+        if (linhaSelecionada != -1) {
+            id = jTableDados.getModel().getValueAt(linhaSelecionada, 0).toString();
+            descricao = jTableDados.getModel().getValueAt(linhaSelecionada, 1).toString();
+        }
+
+        campoId.setText(id);
+        campoDescricao.setText(descricao);
+
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
